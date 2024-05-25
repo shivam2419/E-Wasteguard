@@ -16,11 +16,18 @@ urlpatterns = [
     path('recycle/', views.recycle, name='recycle'),
     path('education/', views.Education, name='education'),
     path('contact/', views.contact, name='contact'),
+    path('notification/', views.notification, name='notification'),
     path('recycle_main/<str:item_type>/', views.recycle_main_str, name='recycle_main'),
     path('recycle_main/', views.recycle_main, name='recycle_main'),
     path('index_mails/', views.collected_gmails, name='mails'),
     path('settings/<str:pk>/', views.createOwner, name='settings'),
     path('orders/', views.Orders, name='orders'),
+    path('inspect/<str:pk>/', views.Inspect, name='inspect'),
+    path('reject/<str:pk>/', views.RejectOrder, name='rejectOrder'),
+    path('status/', views.Status, name='orderstatus'),
+    path('pending/', views.Pending, name='orderpending'),
+    path('completed/', views.Completed, name='ordercompleted'),
+    path('payment/', views.Payment, name='payment'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

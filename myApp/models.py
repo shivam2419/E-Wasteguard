@@ -33,7 +33,7 @@ class Index_gmails(models.Model):
 class Owner(models.Model):
     image = models.ImageField(upload_to='images/', null=True)
     # about = models.CharField(max_length=200, null=True)
-    organisation_id = models.IntegerField(primary_key=True, max_length=100, default=None)
+    organisation_id = models.IntegerField(primary_key=True, default=None)
     organisation_name = models.CharField(max_length=200)
     phone = models.IntegerField()
 
@@ -51,6 +51,8 @@ class ContactForm(models.Model):
     message = models.CharField(max_length=3000)
 
 class RecycleForm(models.Model):
+    name = models.CharField(max_length=100, null=True)
+    user_id = models.IntegerField(null=True)
     organisation_id = models.CharField(max_length=100, default=1)
     organisation_name = models.CharField(max_length=100, default='Empty')
     brand = models.CharField(max_length=100)
@@ -61,3 +63,17 @@ class RecycleForm(models.Model):
     image = models.ImageField(upload_to='recycle_images/', null=True)
     phone = models.IntegerField()
     facility = models.CharField(max_length=20)
+    created = models.DateTimeField(auto_now_add = True, null=True)
+    status = models.CharField(max_length=10, null=True)
+    class Meta:
+        ordering = ['-created']
+
+class Notification(models.Model):
+    user = models.IntegerField(null=True)
+    status = models.CharField(max_length=100, null=True)
+    created = models.DateTimeField(auto_now_add = True)
+    message = models.CharField(max_length=500)
+    class Meta:
+        ordering = ['-created']
+        
+

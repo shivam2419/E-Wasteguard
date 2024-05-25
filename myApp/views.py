@@ -58,7 +58,8 @@ def loginPage(request):
                 login(request, user)
                 return redirect('index') 
             # message = user.message_set.all()
-
+        else:
+            messages.error(request, 'Password is incorrect')
         # In the above condition there are two cases to check validity of user you can use any of them
     context={'page':page, 'messsages':message}
     return render(request, 'login.html', context)
@@ -163,6 +164,14 @@ def collected_gmails(request):
     print('helo')
     return render(request, 'index.html')
 
+@login_required(login_url='login')
+def notification(request):
+    pk = request.user.id
+    data = Notification.objects.filter(user = pk)
+    context = {
+        'data' : data
+    }
+    return render(request, 'notification.html', context)
 
 @login_required(login_url='login')
 def userProfile(request):
@@ -182,7 +191,11 @@ def userProfile(request):
 
 @login_required(login_url='login')
 def recycle_main_str(request, item_type):
+    id = request.user
+    message = ""
     if request.method == "POST":
+        username = id.username
+        user_id = id.id
         organisation_id = request.POST.get('id')
         organisation_name = request.POST.get('organisation_name')
         brand = request.POST.get('brand')
@@ -194,15 +207,20 @@ def recycle_main_str(request, item_type):
         phone = request.POST.get('phone')
         facility = request.POST.get('facility')
 
-        obj = RecycleForm.objects.create(organisation_id = organisation_id, organisation_name=organisation_name, brand=brand, model = model, price = price, date=date, location=location, image=images, phone = phone,facility=facility)
+        obj = RecycleForm.objects.create(name=username, user_id = user_id, organisation_id = organisation_id, organisation_name=organisation_name, brand=brand, model = model, price = price, date=date, location=location, image=images, phone = phone,facility=facility)
     data = Owner.objects.all()
     context = {'item':item_type,
-               'data' : data}
+               'data' : data,
+               'msg' : message}
     return render(request, 'recycle_main.html', context)
 
 @login_required(login_url='login')
 def recycle_main(request):
+    id = request.user
+    print(id)
     if request.method == "POST":
+        username = id.username
+        user_id = id.id
         organisation_id = request.POST.get('id')
         organisation_name = request.POST.get('organisation_name')
         brand = request.POST.get('brand')
@@ -214,7 +232,7 @@ def recycle_main(request):
         phone = request.POST.get('phone')
         facility = request.POST.get('facility')
 
-        obj = RecycleForm.objects.create(organisation_id = organisation_id, organisation_name=organisation_name, brand=brand, model = model, price = price, date=date, location=location, image=images, phone = phone,facility=facility)
+        obj = RecycleForm.objects.create(name=username, user_id = id, organisation_id = organisation_id, organisation_name=organisation_name, brand=brand, model = model, price = price, date=date, location=location, image=images, phone = phone,facility=facility)
     return render(request, 'recycle_main.html',)
 
 @login_required(login_url='login')
@@ -234,9 +252,11 @@ def createOwner(request, pk):
         lat = request.POST.get('latitude')
         longi = request.POST.get('longitude')
 
-        obj = Owner.objects.create(image=image,
+        obj = Owner(image=image,
                                    organisation_id=organisation_id,organisation_name=organisation_name, phone=phone, street=street, city=city, state=state, zipcode = zip_code, latitude= lat, longitude = longi)
-    organisation_data = Owner.objects.filter(organisation_id=pk)
+        obj.save()
+        return render(request, 'staff/index.html')
+    organisation_data = Owner.objects.get(organisation_id=pk)
     context = {
         'organisation' : organisation_data
     }
@@ -246,14 +266,64 @@ def createOwner(request, pk):
 def Orders(request):
     user = User.objects.get(pk = request.user.id)
     to_id = user.id
-
     data = RecycleForm.objects.filter(organisation_id=to_id)
     data = [(index + 1, item) for index, item in enumerate(data)]
-
     owner_info = Owner.objects.filter(organisation_id=to_id)
-    print(owner_info)
     context = {
         'items' : data,
         'user' : owner_info
     }
-    return render(request, './staff/order.html', context)
+    return render(request, 'staff/order.html', context)
+
+@login_required(login_url='login')
+def Inspect(request, pk):
+    recycle_data = RecycleForm.objects.get(id=pk, organisation_id = request.user.id)
+    context = { 
+        'recycle_data' : recycle_data
+    }
+    print(recycle_data.organisation_name)
+    if request.method == 'POST':
+        status = 'True'
+        user = recycle_data.user_id
+        organisation_name = recycle_data.organisation_name
+        data = "Your request to "+organisation_name+" has been accepted by the supplier. Delievery boy will reach to you within 7 days."
+        obj = Notification(status = status, user = user, message = data)
+        obj.save()
+        return render(request, 'staff/index.html')
+    return render(request, 'staff/inspect.html', context)
+
+@login_required(login_url='login')
+def RejectOrder(request, pk):
+    recycle_data = RecycleForm.objects.get(id=pk, organisation_id = request.user.id)
+    context = { 
+        'recycle_data' : recycle_data
+    }
+    print(recycle_data.organisation_name)
+    if request.method == 'POST':
+        status = 'False'
+        user = recycle_data.user_id
+        organisation_name = recycle_data.organisation_name
+        data = request.POST.get('reason')
+        data = "Your order to "+organisation_name+" has been cancelled because "+data
+        obj = Notification(status = status, user = user, message = data)
+        obj.save()
+        return render(request, 'staff/index.html')
+    return render(request, 'staff/reject_order.html', context)
+
+def Status(request):
+    return render(request, 'staff/order_status.html')
+def Pending(request):
+    recycle_data = RecycleForm.objects.filter(status="False", organisation_id = request.user.id)
+    context = {
+        'data' : recycle_data
+    }
+    return render(request, 'staff/order_pending.html', context)
+def Completed(request):
+    recycle_data = RecycleForm.objects.filter(status="True", organisation_id = request.user.id)
+    context = {
+        'data' : recycle_data
+    }
+    return render(request, 'staff/order_completed.html', context)
+
+def Payment(request):
+    return render(request, 'staff/payment.html')
