@@ -69,6 +69,7 @@
             <thead>
                 <tr>
                     <th>S.No</th>
+                    <th>Name</th>
                     <th>Brand</th>
                     <th>Address</th>
                     <th>Status</th>
@@ -82,6 +83,9 @@
                         {{index}}
                     </td>
                     <td>
+                        {{items.name}}
+                    </td>
+                    <td>
 
                         {{items.brand}}
                     </td>
@@ -91,7 +95,7 @@
                     </td>
                     <td>
                         <button><a href="">Get Direction</a></button>
-                        <button><a href="">Inspect</a></button>
+                        <button><a href="{% url 'inspect' items.id %}">Inspect</a></button>
                     </td>
                 </tr>
                 {% endfor %}

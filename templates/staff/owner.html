@@ -23,7 +23,7 @@
                         <div class="account-settings">
                             <div class="user-profile">
                                 <div class="user-avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                                    <img src="{{organisation.image.url}}" alt="Maxwell Admin">
                                     <br>
                                     <input type="file" multiple style="width: 50%; font-size: 14px;  margin-top: 20px;" name="image">
                                 </div>
@@ -34,8 +34,7 @@
                             </div>
                             <div class="about">
                                 <h5>About</h5>
-                                <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human
-                                    experiences.</p>
+                                <p>I'm a proud waste collector. Giving my YOGDAAN in society wellness.</p>
                             </div>
                         </div>
                     </div>
@@ -61,21 +60,22 @@
                                     <div class="form-group">
                                         <label for="eMail">Organisation Id</label>
                                         <input type="text" class="form-control" id="eMail" placeholder="Enter email ID"
-                                            name="organisation_id">
+                                        value="{{organisation.organisation_id}}"
+                                            name="organisation_id" disabled >
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="phone">Phone</label>
                                         <input type="text" class="form-control" id="phone"
-                                            placeholder="Enter phone number" name="phone">
+                                            placeholder="Enter phone number" value="{{organisation.phone}}" name="phone">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="website">Website </label>
                                         <input type="url" class="form-control" id="website"
-                                            placeholder="Website url (optional)*" name="website">
+                                            placeholder="Website url (optional)*"  name="website">
                                     </div>
                                 </div>
                             </div>
@@ -86,43 +86,43 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="Street">Street</label>
-                                        <input type="name" class="form-control" id="Street" placeholder="Enter Street"
+                                        <input type="name" class="form-control" id="Street" placeholder="Enter Street" value="{{organisation.street}}"
                                             name="street">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="ciTy">City</label>
-                                        <input type="name" class="form-control" id="ciTy" placeholder="Enter City"
+                                        <input type="name" class="form-control" id="ciTy" placeholder="Enter City" value="{{organisation.city}}"
                                             name="city">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label for="sTate">State</label>
-                                        <input type="text" class="form-control" id="sTate" placeholder="Enter State"
+                                        <label for="state">State</label>
+                                        <input type="text" class="form-control" id="sTate" placeholder="Enter State" value="{{organisation.state}}"
                                             name="state">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="zIp">Zip Code</label>
-                                        <input type="text" class="form-control" id="zIp" placeholder="Zip Code"
+                                        <input type="text" class="form-control" id="zIp" placeholder="Zip Code" value="{{organisation.zipcode}}"
                                             name="zipcode">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label for="sTate">Latitude</label>
+                                        <label for="state">Latitude</label>
                                         <input type="text" class="form-control" id="latitude" placeholder="Latitude"
-                                            name="latitude">
+                                            name="latitude" style="display:none;">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="zIp">Longitude</label>
                                         <input type="text" class="form-control" id="longitude" placeholder="Longitude"
-                                            name="longitude">
+                                            name="longitude" style="display:none;">
                                     </div>
                                 </div>
                             </div>

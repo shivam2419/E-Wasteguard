@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}DETAILS{% endblock title %}
+    {% block css %}{% static "inspect.css" %}{% endblock css %}
+
+</head>
+
+<body>
+    {% block body %}
+    <div class="container">
+        <div class="user">
+            <img src="/static/owner2.jpg" alt="">
+            <h2>{{recycle_data.name | upper}}</h2>
+            <p>{{recycle_data.email}}</p>
+        </div>
+        <br><br>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>
+                        Content
+                    </th>
+                    <th>
+                        Details
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Brand :
+                    </td>
+                    <td>
+                        {{recycle_data.brand}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Model :
+                    </td>
+                    <td>
+                        {{recycle_data.model}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Asked Price :
+                    </td>
+                    <td>
+                        {{recycle_data.price}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Product date :
+                    </td>
+                    <td>
+                        {{recycle_data.date}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Address :
+                    </td>
+                    <td>
+                        {{recycle_data.location}}
+                    </td>
+                </tr>
+                
+            </table>
+            <br>
+            <button>
+                <label for="">Accept Request : </label>
+                <a href="">
+                    <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjc2NS0yMC5wbmc.png"
+                        alt="">
+                </a>
+            </button>
+                <label for="">Reject Request : </label>
+                <a href="{% url "rejectOrder" recycle_data.id %}">
+                    <img src="https://t3.ftcdn.net/jpg/05/38/50/06/360_F_538500677_KHHga3rUks6ftokeDbqE1qwpjpBvDdHl.jpg"
+                        alt="">
+                </a>
+
+        </form>
+
+    </div>
+    {% endblock body %}
+</body>
+
+</html>

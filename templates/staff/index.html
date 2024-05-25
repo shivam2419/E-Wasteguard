@@ -46,7 +46,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
         <img src="/static/assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">E-Waste</span>
+        <span class="d-none d-lg-block">E-Wasteguard</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -98,7 +98,7 @@
       </li><!-- End Dashboard Nav -->
 
       <li class="nav-item">
-        <a href="{% url "orders" %}" class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" >
+        <a href="{% url "orders" %}" class="nav-link collapsed" data-bs-target="#components-nav" >
           <i class="bi bi-menu-button-wide"></i><span>Orders</span>
         </a>
       </li>
@@ -106,6 +106,16 @@
       <li class="nav-item">
         <a href="{% url "settings" user.id %}" class="nav-link collapsed" data-bs-target="#components-nav"  >
           <i class="bi bi-menu-button-wide"></i><span>Settings</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url "orderstatus" %}" class="nav-link collapsed" data-bs-target="#components-nav"  >
+          <i class="bi bi-menu-button-wide"></i><span>Payments</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url "logout" %}" class="nav-link collapsed" data-bs-target="#components-nav"  >
+          <i class="bi bi-menu-button-wide"></i><span>Logout</span>
         </a>
       </li>
       <!-- End Components Nav -->
