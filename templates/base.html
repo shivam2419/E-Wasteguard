@@ -31,6 +31,10 @@
                 <li><a href="{% url "contact" %}">Contact Us</a></li>
             </ul>
             {% if user.is_authenticated %}
+            <div class="right_side" style="display: flex;">
+                {% if not request.user.is_staff %}
+                <button id="notification"><a href="{% url 'notification' %}"><img src="/static/notification.png" alt="" ></a></button>
+            {% endif %}
             <li class="nav-item dropdown">
                 <span class="profile-image" id="profileImage">
                     <img src="{% static 'owner2.jpg' %}" alt="Profile"  >
@@ -42,10 +46,10 @@
                   <a href="{% url 'profile' %}">Profile</a>
                 </div>
               </li>
+            </div>
             {% else %}
             <span>
-                <a href="{% url "login" %}" class="btn">USER LOGIN</a>
-                <a href="{% url "recycler-login" %}" class="btn">RECYCLER LOGIN</a>
+                <a href="{% url "login" %}" class="btn">LOGIN</a>
             </span>
             {% endif %}
         </nav>
@@ -73,20 +77,20 @@
         </div>
         <div class="footer-services">
             <h3>Our Services</h3>
-            <a href="">Laptop Recycle</a><br>
-            <a href="">Smartphone Recycle</a><br>
-            <a href="">Accessories Recycle</a><br>
-            <a href="">Refrigeratir Recycle</a><br>
-            <a href="">Television Recycle</a><br>
-            <a href="">Washing Machine Recycle</a><br>
+            <a href="recycle_main/laptop/">Laptop Recycle</a><br>
+            <a href="recycle_main/smartphone/">Smartphone Recycle</a><br>
+            <a href="recycle_main/items/">Accessories Recycle</a><br>
+            <a href="recycle_main/refrigerator/">Refrigerator Recycle</a><br>
+            <a href="recycle_main/television/">Television Recycle</a><br>
+            <a href="recycle_main/washing machine/">Washing Machine Recycle</a><br>
         </div>
         <div class="footer-company">
             <h3>Comapany</h3>
-            <a href="">About Us</a><br>
-            <a href="">E-Waste Facilities</a><br>
-            <a href="">Education</a><br>
+            <a href="about/">About Us</a><br>
+            <a href="e-facility/">E-Waste Facilities</a><br>
+            <a href="education/">Education</a><br>
             <a href="">Latest News</a><br>
-            <a href="">Contact Us</a><br>
+            <a href="contact/">Contact Us</a><br>
             <a href="">Our Blog</a><br>
         </div>
         <div class="footer-contact">
