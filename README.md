@@ -1,4 +1,7 @@
 # E-Waste Management System
+# E-Waste Management System
+
+![E-Waste Management System](Ewaste-images/ewaste-home.png)
 
 ## Overview
 The E-Waste Management System is a project aimed at developing an efficient and sustainable solution for managing electronic waste. The system provides a platform for users to dispose of their electronic waste responsibly while promoting recycling and environmental conservation.
@@ -53,9 +56,6 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 2. Create a new branch for your feature or bug fix.
 3. Make your changes and commit them.
 4. Push to your fork and submit a pull request.
-
-## License
-This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 - [Django Documentation](https://docs.djangoproject.com/en/stable/)
