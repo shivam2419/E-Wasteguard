@@ -1,7 +1,8 @@
 # E-Waste Management System
-**E-Waste Management System IMAGE : 
+# Image: 
 ![E-Waste Management System](Ewaste-images/ewaste-home.png)
---For more images, open 'Ewaste-images' folder
+
+**For more images, open given 'Ewaste-images' folder in repo...**
 
 ## Overview
 The E-Waste Management System is a project aimed at developing an efficient and sustainable solution for managing electronic waste. The system provides a platform for users to dispose of their electronic waste responsibly while promoting recycling and environmental conservation.
