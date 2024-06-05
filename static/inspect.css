@@ -1,0 +1,44 @@
+.container{
+    margin: auto;
+    width: 400px;
+    box-shadow: 1px 1px 10px 1px gray;
+    padding: 3%;
+    margin-top: 3%;
+}
+.container .user{
+    text-align: center;
+}
+.container .user img{
+    height: 80px;
+    border-radius: 50%;
+}
+form table{
+    width: 100%;
+}
+form table th{
+    background-color: blue;
+    padding: 8px;
+    color: white;
+}
+form table td:last-child{
+    border-left: 1px solid gray;
+}
+form table td{
+    padding: 5px;
+    border-bottom: 1px solid gray;
+}
+form a img{
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: -15px;
+}
+form button label{
+    margin-top: -10px;
+    margin-right: 5px;
+}
+form button{
+    background-color: white;
+    line-height: 50px;
+    border: none;
+    margin-right: 10px;
+}
