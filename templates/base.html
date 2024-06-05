@@ -33,7 +33,7 @@
             {% if user.is_authenticated %}
             <div class="right_side" style="display: flex;">
                 {% if not request.user.is_staff %}
-                <button id="notification"><a href="{% url 'notification' %}"><img src="/static/notification.png" alt="" ></a></button>
+                <button id="notification"><a href="{% url 'notification' %}"><img src="{% static 'notification.png' %}" alt="" ></a></button>
             {% endif %}
             <li class="nav-item dropdown">
                 <span class="profile-image" id="profileImage">
