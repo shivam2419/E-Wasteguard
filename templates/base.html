@@ -27,8 +27,8 @@
                 <li><a href="{% url "e-facility" %}">E-Facilities</a></li>
                 <li><a href="{% url "recycle" %}">Recycle</a></li>
                 <li><a href="{% url "education" %}">Education</a></li>
-                <li><a href="#">Rules</a></li>
                 <li><a href="{% url "contact" %}">Contact Us</a></li>
+                <li><a href="{% url "search" %}">Search</a></li>
             </ul>
             {% if user.is_authenticated %}
             <div class="right_side" style="display: flex;">
@@ -64,7 +64,10 @@
             <form action="{% url 'mails' %}" method="POST">
                 {% csrf_token %}
                 <img src="../static/logo.png" alt="">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque ex veniam voluptatibus porro, nobis dolor quia fugiat saepe numquam dolores minus earum officia fuga animi excepturi dolorum, inventore aspernatur similique id reprehenderit unde laudantium! Harum quos, eaque, possimus consequatur sequi inventore repellendus corporis, eum veritatis laudantium repellat dolores voluptas commodi!</p>
+                <p>&copy; 2024 E-Wasteguard. All rights reserved.</p>
+        <p>
+            Dedicated to sustainable e-waste management and environmental protection.
+        </p>
                 <input type="email" placeholder="Enter your email*" name="index_gmail">
                 <span>
                     <button type="submit">
@@ -86,12 +89,10 @@
         </div>
         <div class="footer-company">
             <h3>Comapany</h3>
-            <a href="about/">About Us</a><br>
-            <a href="e-facility/">E-Waste Facilities</a><br>
-            <a href="education/">Education</a><br>
-            <a href="">Latest News</a><br>
-            <a href="contact/">Contact Us</a><br>
-            <a href="">Our Blog</a><br>
+            <a href="{% static "index" %}">About Us</a><br>
+            <a href="{% static "recycle" %}">E-Waste Facilities</a><br>
+            <a href="{% static "education" %}">Education</a><br>
+            <a href="{% static "contact" %}">Contact Us</a><br>
         </div>
         <div class="footer-contact">
             <h3>Contact Us</h3>

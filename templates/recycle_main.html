@@ -11,7 +11,7 @@
         <h2>Recycling {{ item|upper }}</h2>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="row-1">
+            {% comment %} <div class="row-1">
                 <div class="col-1">
                     <label for="">Organisation Id</label>
                     <br>
@@ -36,12 +36,12 @@
                         {% endfor %}
                     </select>
                 </div>
-            </div>
+            </div> {% endcomment %}
             <div class="row-1">
                 <div class="col-1">
                     <label for="">Select Brand</label>
                     <br>
-                    <select name="brand" id="brandSelect" onchange="updateModelOptions()">
+                    <select name="brand" id="brandSelect" onchange="updateModelOptions()" required>
                         <option value="" selected>Select Brand</option>
                         <option value="lenovo">Lenovo</option>
                         <option value="samsung">Samsung</option>
@@ -54,7 +54,7 @@
                 <div class="col-2">
                     <label for="">Select Model</label>
                     <br>
-                    <select id="modelSelect" class="hidden" name="model">
+                    <select id="modelSelect" class="hidden" name="model" required>
                         <option value="" selected>Select Model</option>
                         <!-- Options will be populated dynamically based on the selected brand -->
                     </select>
@@ -64,12 +64,12 @@
                 <div class="col-1">
                     <label for="">Recycle item price</label>
                     <br>
-                    <input type="text" placeholder="0000" name="price">
+                    <input type="text" placeholder="0000" name="price" required>
                 </div>
                 <div class="col-2">
                     <label for="">Item Buy date</label>
                     <br>
-                    <input type="date" name="date">
+                    <input type="date" name="date" required>
                 </div>
             </div>
 
@@ -78,13 +78,13 @@
                 <div class="col-1">
                     <label for="">Location</label>
                     <br>
-                    <input type="text" name="location">
+                    <input type="text" name="location" required>
                     
                 </div>
                 <div class="col-2">
                     <label for="">Item Images</label>
                     <br>
-                    <input type="file" name="image">
+                    <input type="file" name="image" required>
                 </div>
             </div>
 
@@ -92,12 +92,12 @@
                 <div class="col-1">
                     <label for="">Phone</label>
                     <br>
-                    <input type="number" placeholder="" name="phone">
+                    <input type="number" placeholder="" name="phone" required>
                 </div>
                 <div class="col-2">
                     <label for="">Select Facility</label>
                     <br>
-                    <select id="" class="" name="facility">
+                    <select id="" class="" name="facility" required>
                         <option value="" selected>Select Facility</option>
                         <option value="self" >Self reach</option>
                         <option value="company" >Home take</option>

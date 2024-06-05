@@ -8,7 +8,7 @@
     <style>
         /* Center the table on the page */
         h1{
-            font-size: 8vh;
+            font-size: 4rem;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             letter-spacing: 0.5rem;
         }
@@ -52,6 +52,27 @@
             text-decoration: none;
             color: white
         }
+        @media screen and (max-width: 800px) {
+            h1{
+                font-size : 2rem;
+            }
+            h2{
+                margin-left: 1%;
+            }
+            .my-table th,
+            .my-table td {
+                padding: 8px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+            button{
+                margin: 10px;
+                width: 70px;
+            }
+            button a{
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 
@@ -94,7 +115,7 @@
                         {{items.location}}
                     </td>
                     <td>
-                        <button><a href="">Get Direction</a></button>
+                        <button><a href="">Direction</a></button>
                         <button><a href="{% url 'inspect' items.id %}">Inspect</a></button>
                     </td>
                 </tr>
