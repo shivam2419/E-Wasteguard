@@ -8,7 +8,16 @@ from django.contrib.auth.decorators import login_required
 from geopy.geocoders import Nominatim
 from .models import *
 from .forms import *
-# Create your views here.
+from django.db import transaction
+from django.http import JsonResponse
+# import the OpenAI Python library for calling the OpenAI API
+from openai import OpenAI
+import os
+import json
+
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-proj-vMahWzYffuhtdwFsfvxyT3BlbkFJQutK1ABvYd9cMGIRAO0Y"))
+
+# openai.api_key = open_api_key
 def index(request):
     page = ''
     questions = QNA.objects.all()
@@ -118,9 +127,6 @@ def registerPage(request):
 def about(request):
     return render(request, 'about.html')
 
-
-
-
 def E_facility(request):
     q = request.GET.get('q', '')  # Get the query string, default to empty string if not provided
     rooms = Owner.objects.filter(
@@ -153,6 +159,28 @@ def contact(request):
         obj = ContactForm(name=contact_name, email = contact_email, phone_number = contact_phone, message = contact_message)
         obj.save()
     return render(request, 'contact.html')
+
+def ask_openai(message):
+    # Example OpenAI Python library request
+    MODEL = "gpt-3.5-turbo"
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Knock knock."},
+            {"role": "assistant", "content": "Who's there?"},
+            {"role": "user", "content": "Orange."},
+        ],
+        temperature=0,
+    )
+    print(json.dumps(json.loads(response.model_dump_json()), indent=4))
+
+def search(request):
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        response = ask_openai(message)
+        return JsonResponse({'message':message, 'response':response})
+    return render(request, 'help.html')
 
 @login_required(login_url='login')
 def collected_gmails(request):
@@ -196,8 +224,8 @@ def recycle_main_str(request, item_type):
     if request.method == "POST":
         username = id.username
         user_id = id.id
-        organisation_id = request.POST.get('id')
-        organisation_name = request.POST.get('organisation_name')
+        organisation_id = 1
+        organisation_name = 'Vishwas management system'
         brand = request.POST.get('brand')
         model = request.POST.get('model')
         price = request.POST.get('price')
@@ -206,8 +234,9 @@ def recycle_main_str(request, item_type):
         images = request.FILES.get('image')
         phone = request.POST.get('phone')
         facility = request.POST.get('facility')
-
         obj = RecycleForm.objects.create(name=username, user_id = user_id, organisation_id = organisation_id, organisation_name=organisation_name, brand=brand, model = model, price = price, date=date, location=location, image=images, phone = phone,facility=facility)
+
+        return redirect('index')
     data = Owner.objects.all()
     context = {'item':item_type,
                'data' : data,
@@ -325,5 +354,30 @@ def Completed(request):
     }
     return render(request, 'staff/order_completed.html', context)
 
-def Payment(request):
-    return render(request, 'staff/payment.html')
+def payment(request, pk):
+    user = RecycleForm.objects.get(user_id = pk)
+    user_name = user.name
+    your_name = request.user.username   
+    if request.method == 'POST':
+        try:
+            user_one = request.POST.get('user')
+            user_two = your_name
+            amount = request.POST.get('amount')
+            # with transaction.atomic(): 
+            user_one_obj = Payments.objects.get(user = user_one)
+            user_one_obj.amount += int(amount)
+            user_one_obj.save()
+            print(user_one)
+
+            user_two_obj = Payments.objects.get(user = user_two)
+            user_two_obj.amount -= int(amount)
+            user_two_obj.save()
+            messages.success(request, 'Your amount is transfered')
+        except Exception as e:
+            print(e)
+            messages.success(request, "Something went wrong.")
+    context = {
+        'user' : user_name,
+        'you' : your_name
+    }
+    return render(request, 'staff/payment.html', context)

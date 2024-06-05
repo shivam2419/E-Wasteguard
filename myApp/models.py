@@ -53,13 +53,13 @@ class ContactForm(models.Model):
 class RecycleForm(models.Model):
     name = models.CharField(max_length=100, null=True)
     user_id = models.IntegerField(null=True)
-    organisation_id = models.CharField(max_length=100, default=1)
-    organisation_name = models.CharField(max_length=100, default='Empty')
-    brand = models.CharField(max_length=100)
-    model = models.CharField(max_length=200)
-    price= models.IntegerField()
-    date = models.CharField(max_length=100)
-    location = models.CharField(max_length=200)
+    organisation_id = models.CharField(max_length=100, default=1, null=True)
+    organisation_name = models.CharField(max_length=100, default='Empty', null=True)
+    brand = models.CharField(max_length=100, null=True)
+    model = models.CharField(max_length=200, null=True)
+    price= models.IntegerField(null=True)
+    date = models.CharField(max_length=100, null=True)
+    location = models.CharField(max_length=200, null=True)
     image = models.ImageField(upload_to='recycle_images/', null=True)
     phone = models.IntegerField()
     facility = models.CharField(max_length=20)
@@ -77,3 +77,9 @@ class Notification(models.Model):
         ordering = ['-created']
         
 
+class Payments(models.Model):
+    user = models.CharField(max_length=100)
+    amount = models.IntegerField(default=0)
+
+    def __str__(self) -> str:
+        return self.user

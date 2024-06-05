@@ -16,6 +16,7 @@ urlpatterns = [
     path('recycle/', views.recycle, name='recycle'),
     path('education/', views.Education, name='education'),
     path('contact/', views.contact, name='contact'),
+    path('search/', views.search, name='search'),
     path('notification/', views.notification, name='notification'),
     path('recycle_main/<str:item_type>/', views.recycle_main_str, name='recycle_main'),
     path('recycle_main/', views.recycle_main, name='recycle_main'),
@@ -27,7 +28,7 @@ urlpatterns = [
     path('status/', views.Status, name='orderstatus'),
     path('pending/', views.Pending, name='orderpending'),
     path('completed/', views.Completed, name='ordercompleted'),
-    path('payment/', views.Payment, name='payment'),
+    path('payment/<str:pk>/', views.payment, name='payment'),
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
