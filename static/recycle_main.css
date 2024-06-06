@@ -48,3 +48,16 @@ form .row-1, form .row-2, form .row-3, form .row-4{
     border: 1px solid blue;
     cursor: pointer;
 }
+
+@media screen and (max-width: 800px) {
+    form .row-1, form .row-2, form .row-3, form .row-4{
+        display: block;
+    }
+    .col-1 input, .col-2 input{
+        width: 90%;
+    }
+    .col-1 select, .col-2 select{
+        width: 98%;
+    }
+
+}
