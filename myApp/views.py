@@ -15,6 +15,9 @@ from openai import OpenAI
 import os
 import json
 
+from django.core.mail import send_mail
+from django.conf import settings
+# Mail pass : quvk vwkd pfkd lcht
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY", "sk-proj-vMahWzYffuhtdwFsfvxyT3BlbkFJQutK1ABvYd9cMGIRAO0Y"))
 
 # openai.api_key = open_api_key
@@ -143,6 +146,7 @@ def E_facility(request):
 def Waste_owner(request):
     return render(request, 'efacility.html')
 
+@login_required(login_url='login')
 def recycle(request):
     return render(request, 'recycle.html')
 
@@ -381,3 +385,4 @@ def payment(request, pk):
         'you' : your_name
     }
     return render(request, 'staff/payment.html', context)
+

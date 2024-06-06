@@ -64,7 +64,7 @@ class RecycleForm(models.Model):
     phone = models.IntegerField()
     facility = models.CharField(max_length=20)
     created = models.DateTimeField(auto_now_add = True, null=True)
-    status = models.CharField(max_length=10, null=True)
+    status = models.CharField(max_length=10, null=True, default=False)
     class Meta:
         ordering = ['-created']
 
